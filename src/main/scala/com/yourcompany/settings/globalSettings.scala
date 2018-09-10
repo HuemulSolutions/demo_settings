@@ -1,6 +1,7 @@
 package com.yourcompany.settings
 
 import com.huemulsolutions.bigdata.common._
+import scala.collection.mutable._
 
 /**
  * Configuración del ambiente
@@ -8,6 +9,8 @@ import com.huemulsolutions.bigdata.common._
 object globalSettings {
    val Global: huemul_GlobalPath  = new huemul_GlobalPath()
    Global.GlobalEnvironments = "production, experimental"
+   
+   
    
    Global.POSTGRE_Setting.append(new huemul_KeyValuePath("production","jdbc:postgresql://35.188.65.185:5432/postgres?user=postgres&password=huemul-control&currentSchema=public"))
    Global.POSTGRE_Setting.append(new huemul_KeyValuePath("experimental","jdbc:postgresql://{{000.000.000.000}}:5432/{{database_name}}?user={{user_name}}&password={{password}}&currentSchema=public"))
@@ -80,6 +83,14 @@ object globalSettings {
    
    Global.SANDBOX_BigFiles_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/sandbox/"))
    Global.SANDBOX_BigFiles_Path.append(new huemul_KeyValuePath("experimental","hdfs:///user/data/experimental/sandbox/"))
+
+   val SANDBOX_MIS_Path = new ArrayBuffer[huemul_KeyValuePath]()
+   SANDBOX_MIS_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/sandbox/mis/"))
+   SANDBOX_MIS_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/sandbox/mis/"))
+   
+   val SANDBOX_MIS_DataBase = new ArrayBuffer[huemul_KeyValuePath]()
+   SANDBOX_MIS_DataBase.append(new huemul_KeyValuePath("production","production_sandbox_mis"))
+   SANDBOX_MIS_DataBase.append(new huemul_KeyValuePath("experimental","experimental_sandobox_mis"))
 
 }
 
