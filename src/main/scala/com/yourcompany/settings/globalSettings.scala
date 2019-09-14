@@ -2,6 +2,9 @@ package com.yourcompany.settings
 
 import com.huemulsolutions.bigdata.common._
 import scala.collection.mutable._
+import scala.io.Source
+import java.io.{FileNotFoundException, IOException}
+
 
 /**
  * Configuración del ambiente
@@ -10,15 +13,34 @@ object globalSettings {
    val Global: huemul_GlobalPath  = new huemul_GlobalPath()
    Global.GlobalEnvironments = "production, experimental"
    
+   /**
+   * Get encrypted key from file, and return decrypted key. 
+   */
+  def getKeyFromFile(fileName: String): String = {
+    var key: String = null
+    
+   try {
+      val openFile = Source.fromFile(fileName)
+      key = openFile.getLines.mkString
+      openFile.close()
+    } catch {
+        case e: FileNotFoundException => println(s"Couldn't find that file: ${fileName}")
+        case e: IOException => println(s"(${fileName}). Got an IOException! ${e.getLocalizedMessage}")
+        case e: Exception => println(s"exception opening ${fileName}")
+    }
+    
+    return key
+  }
+   
+   val localPath: String = System.getProperty("user.dir").concat("\\")
    
    
-   Global.POSTGRE_Setting.append(new huemul_KeyValuePath("production","jdbc:postgresql://35.188.65.185:5432/postgres?user=postgres&password=huemul-control&currentSchema=public"))
-   Global.POSTGRE_Setting.append(new huemul_KeyValuePath("experimental","jdbc:postgresql://{{000.000.000.000}}:5432/{{database_name}}?user={{user_name}}&password={{password}}&currentSchema=public"))
+   Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
+   Global.CONTROL_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
    
-   Global.ImpalaEnabled = true
-   
-   Global.IMPALA_Setting.append(new huemul_KeyValuePath("production","jdbc:postgresql://35.188.65.185:5432/postgres?user=postgres&password=huemul-control&currentSchema=public"))
-   Global.IMPALA_Setting.append(new huemul_KeyValuePath("experimental","jdbc:postgresql://{{000.000.000.000}}:5432/{{database_name}}?user={{user_name}}&password={{password}}&currentSchema=public"))
+   Global.ImpalaEnabled = false
+   Global.IMPALA_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
+   Global.IMPALA_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
    
    
    //TEMPORAL SETTING
@@ -83,14 +105,28 @@ object globalSettings {
    
    Global.SANDBOX_BigFiles_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/sandbox/"))
    Global.SANDBOX_BigFiles_Path.append(new huemul_KeyValuePath("experimental","hdfs:///user/data/experimental/sandbox/"))
-
-   val SANDBOX_MIS_Path = new ArrayBuffer[huemul_KeyValuePath]()
-   SANDBOX_MIS_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/sandbox/mis/"))
-   SANDBOX_MIS_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/sandbox/mis/"))
    
-   val SANDBOX_MIS_DataBase = new ArrayBuffer[huemul_KeyValuePath]()
-   SANDBOX_MIS_DataBase.append(new huemul_KeyValuePath("production","production_sandbox_mis"))
-   SANDBOX_MIS_DataBase.append(new huemul_KeyValuePath("experimental","experimental_sandobox_mis"))
+   //DQ_ERROR SETTING
+   Global.DQ_SaveErrorDetails = true
+   Global.DQError_DataBase.append(new huemul_KeyValuePath("production","production_DQError"))
+   Global.DQError_DataBase.append(new huemul_KeyValuePath("experimental","experimental_DQError"))
+   
+   Global.DQError_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/dqerror/"))
+   Global.DQError_Path.append(new huemul_KeyValuePath("experimental","hdfs:///user/data/experimental/dqerror/"))
 
+   //OLD VALUE TRACE
+   Global.MDM_SaveOldValueTrace = true
+   Global.MDM_OldValueTrace_DataBase.append(new huemul_KeyValuePath("production","production_mdm_oldvalue"))
+   Global.MDM_OldValueTrace_DataBase.append(new huemul_KeyValuePath("experimental","experimental_mdm_oldvalue"))
+   
+   Global.MDM_OldValueTrace_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/mdm_oldvalue/"))
+   Global.MDM_OldValueTrace_Path.append(new huemul_KeyValuePath("experimental","hdfs:///user/data/experimental/mdm_oldvalue/"))
+
+   //BACKUP
+   Global.MDM_Backup_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/backup/"))
+   Global.MDM_Backup_Path.append(new huemul_KeyValuePath("experimental","hdfs:///user/data/experimental/backup/"))
+
+
+   
 }
 
