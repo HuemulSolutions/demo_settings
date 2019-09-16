@@ -32,8 +32,8 @@ object globalSettings {
     return key
   }
    
-   val localPath: String = System.getProperty("user.dir").concat("\\")
-   
+   val localPath: String = System.getProperty("user.dir").concat("/")
+   println(s"path: ${localPath}")
    
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
