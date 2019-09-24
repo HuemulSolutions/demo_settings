@@ -13,7 +13,7 @@ En el siguiente ejemplo se indican las rutas para los ambientes "production" y "
   Global.MASTER_SmallFiles_Path.append(new huemul_KeyValuePath("experimental","hdfs:///user/data/experimental/master/"))
 ```
 
-Las rutas y configuraciones includas por huemul son las siguientes:
+Las rutas y configuraciones incluidas por huemul son las siguientes:
 
 ### TEMPORAL SETTING
 Ruta usada para almacenar archivos temporales con huemul
