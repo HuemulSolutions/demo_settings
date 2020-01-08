@@ -43,6 +43,9 @@ object globalSettings {
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
    
+   Global.HIVE_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-hive-connection.set")))
+   Global.HIVE_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-hive-connection.set")))
+   
    
    //TEMPORAL SETTING
    Global.TEMPORAL_Path.append(new huemul_KeyValuePath("production","/user/data/production/temp/"))
@@ -128,6 +131,7 @@ object globalSettings {
    Global.MDM_Backup_Path.append(new huemul_KeyValuePath("experimental","/user/data/experimental/backup/"))
 
 
-   
+   //HBase
+   Global.setHBase_available()
 }
 
