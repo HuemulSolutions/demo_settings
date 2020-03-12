@@ -35,7 +35,10 @@ object globalSettings {
    val localPath: String = System.getProperty("user.dir").concat("/")
    println(s"path: ${localPath}")
    
-   Global.HIVE_HourToUpdateMetadata = 5
+   //para ejemplo sobre databricks
+   //Global.setBigDataProvider( huemulType_bigDataProvider.databricks)
+   
+   Global.HIVE_HourToUpdateMetadata =50
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
    
