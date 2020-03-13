@@ -25,6 +25,14 @@
   </properties>
 
   <dependencies>
+  
+    <!-- https://mvnrepository.com/artifact/com.databricks/dbutils-api -->
+	<dependency>
+	    <groupId>com.databricks</groupId>
+	    <artifactId>dbutils-api_2.11</artifactId>
+	    <version>0.0.4</version>
+	</dependency>
+    
   	<dependency>
     	<groupId>com.huemulsolutions.bigdata</groupId>
     	<artifactId>huemul-bigdatagovernance</artifactId>
