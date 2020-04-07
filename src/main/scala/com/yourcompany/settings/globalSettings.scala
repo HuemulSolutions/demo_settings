@@ -38,13 +38,14 @@ object globalSettings {
    println(s"path: ${localPath}")
 
    
-   /*
+     /* 
    //para ejemplo sobre databricks
    Global.setBigDataProvider( huemulType_bigDataProvider.databricks)
    val baseDir = "/mnt/huemul/data"
    
    Global.HIVE_HourToUpdateMetadata =50
 
+ 
    val dbutils = com.databricks.dbutils_v1.DBUtilsHolder.dbutils
    val lControlConnectionString = dbutils.secrets.get(scope = "huemul-test-secret-scope", key = "production-demo-setting-control-connection")
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",lControlConnectionString))
@@ -55,10 +56,11 @@ object globalSettings {
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("production",lImpalaConnectionString))
    //Global.IMPALA_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
 
+   Global.setAVRO_format("avro")
    //FIN DATABRICKS
-  */
-   
-   
+  
+   */
+  
    val baseDir = "/user/data"
    Global.HIVE_HourToUpdateMetadata =50
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
@@ -68,6 +70,15 @@ object globalSettings {
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
 
+   
+   /**
+    * NEW FROM 2.5
+    */
+   
+   //Agrega configuración para uso de Hortonworks Hive Connector
+   //Global.externalBBDD_conf.Using_HWC.setActive(true)
+   
+   
    //from 2.3
    //val HIVE_Setting = new ArrayBuffer[huemul_KeyValuePath]()
    //HIVE_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-hive-connection.set")))
