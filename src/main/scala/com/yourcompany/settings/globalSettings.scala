@@ -61,7 +61,9 @@ object globalSettings {
   
    */
   
-   val baseDir = "/user/data"
+   //val baseDir = "/user/data"
+   val baseDir = "gs://data_huemul_25/data/user/data" //for google
+   
    Global.HIVE_HourToUpdateMetadata =50
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
