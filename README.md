@@ -9,8 +9,8 @@ Huemul incluye una serie de rutas basadas en DAMA, por ejemplo para especificar 
 
 En el siguiente ejemplo se indican las rutas para los ambientes "production" y "experimental"
 ```scala
-  Global.MASTER_SmallFiles_Path.append(new huemul_KeyValuePath("production","hdfs:///user/data/production/master/"))
-  Global.MASTER_SmallFiles_Path.append(new huemul_KeyValuePath("experimental","hdfs:///user/data/experimental/master/"))
+  Global.MASTER_SmallFiles_Path.append(new huemul_KeyValuePath("production","/user/data/production/master/"))
+  Global.MASTER_SmallFiles_Path.append(new huemul_KeyValuePath("experimental","/user/data/experimental/master/"))
 ```
 
 Las rutas y configuraciones incluidas por huemul son las siguientes:
@@ -33,25 +33,35 @@ Rutas y Bases de datos en Hive para almacenar los datos resultantes del procesam
 ### DIM SETTING
 Rutas y Bases de datos en Hive para almacenar los modelos de datos dimensionales (estrella y/o copo de nieve). Estos modelos pueden ser creados a partir de los datos masterizados, o directamente desde las fuentes RAW (depende de la estrategia utilizada).
 * Global.DIM_DataBase: Nombre de la base de datos en Hive que contiene la referencia a un archivo parquet del modelo dimensional (dimension o tabla de hechos)   
-* Global.DIM_SmallFiles_Path: Ruta donde se almacenan los archivos parquet dimensionales pequeños. * Global.DIM_BigFiles_Path: Ruta donde se almacenan los archivos parquet dimensionales grandes.
+* Global.DIM_SmallFiles_Path: Ruta donde se almacenan los archivos parquet dimensionales pequeños. 
+* Global.DIM_BigFiles_Path: Ruta donde se almacenan los archivos parquet dimensionales grandes.
 
 ### ANALYTICS SETTING
 Rutas y Bases de datos en Hive para almacenar los tablones y estructuras utilizadas para la creación y explotación de modelos de Analytics (regresiones, ML, etc).
-* Global.ANALYTICS_DataBase: Nombre de la base de datos en Hive que contiene la referencia a un archivo parquet del modelo analítico.   * Global.ANALYTICS_SmallFiles_Path: Ruta donde se almacenan los archivos parquet pequeños.
+* Global.ANALYTICS_DataBase: Nombre de la base de datos en Hive que contiene la referencia a un archivo parquet del modelo analítico.   
+* Global.ANALYTICS_SmallFiles_Path: Ruta donde se almacenan los archivos parquet pequeños.
 * Global.ANALYTICS_BigFiles_Path: Ruta donde se almacenan los archivos parquet grandes.)
-### REPORTING SETTINGGRutas y bases de datos en Hive para almacenar las tablas que son utilizadas por las herramientas de reporting tradicional. Este ambiente busca evitar que las herramientas de reporting hagan joins excesivo, y de esta forma mejorar la performance tanto del reporte como del ecosistema completo.
-* Global.REPORTING_DataBase: Nombre de la base de datos en Hive que contiene la referencia a un archivo parquet del modelo de reporting.)* Global.REPORTING_SmallFiles_Path: Ruta donde se almacenan los archivos parquet pequeños.
+### REPORTING SETTINGG
+Rutas y bases de datos en Hive para almacenar las tablas que son utilizadas por las herramientas de reporting tradicional. Este ambiente busca evitar que las herramientas de reporting hagan joins excesivo, y de esta forma mejorar la performance tanto del reporte como del ecosistema completo.
+* Global.REPORTING_DataBase: Nombre de la base de datos en Hive que contiene la referencia a un archivo parquet del modelo de reporting.)
+* Global.REPORTING_SmallFiles_Path: Ruta donde se almacenan los archivos parquet pequeños.
 * Global.REPORTING_BigFiles_Path: Ruta donde se almacenan los archivos parquet grandes.
 
 ### SANDBOX SETTING
-El ambiente SandBox permite a los usuarios explorar sin romper nada productivo.G* Global.SANDBOX_DataBase: Nombre de la base de datos en Hive donde están las estructuras creadas por usuarios)* Global.SANDBOX_SmallFiles_Path: Ruta donde se almacenan los archivos parquet pequeños. * Global.SANDBOX_BigFiles_Path: Ruta donde se almacenan los archivos parquet grandes.
-   ### DQ_ERROR SETTING
+El ambiente SandBox permite a los usuarios explorar sin romper nada productivo.G
+* Global.SANDBOX_DataBase: Nombre de la base de datos en Hive donde están las estructuras creadas por usuarios)
+* Global.SANDBOX_SmallFiles_Path: Ruta donde se almacenan los archivos parquet pequeños. 
+* Global.SANDBOX_BigFiles_Path: Ruta donde se almacenan los archivos parquet grandes.
+   
+### DQ_ERROR SETTING
 Este ambiente permite consultar los errores y warnings de DataQuality aplicados sobre las tablas.
 * Global.DQError_DataBase: Nombre de la base de datos en hive.
 * Global.DQError_Path: Ruta donde se almacenan los archivos parquet que contienen el detalle de los errores y warnings de DataQuality)
-### OLD VALUE TRACEEEste ambiente contiene los datos que cambian en las tablas de tipo "master" y "reference"
+### OLD VALUE TRACEE
+Este ambiente contiene los datos que cambian en las tablas de tipo "master" y "reference"
 * Global.MDM_OldValueTrace_DataBase: Nombre de la base de datos en Hive donde los usuarios pueden consultar los cambios de datos de cada tabla / campo.
 * Global.MDM_OldValueTrace_Path: Ruta donde se almacenan los archivos parquet con el historial de cambios.
 
-### BACKUPPEste ambiente contiene los backups de archivos parquet sobre tablas de tipo "master" y "reference"
+### BACKUP
+Este ambiente contiene los backups de archivos parquet sobre tablas de tipo "master" y "reference"
 * Global.MDM_Backup_Path: Ruta donde se almacenan los backups de los archivos parquet.
