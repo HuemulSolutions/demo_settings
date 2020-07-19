@@ -68,11 +68,21 @@ object globalSettings {
   * CONFIGURACION PARA GOOGLE CLOUD PLATFORM
   */
   //val baseDir = "gs://data_huemul_25/data/user/data" //for google
-   
+   val controlSettings: Array[String] = getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set").split(";")
+   val controlConnString:String = controlSettings(0)
+   val controlUserName: String = if (controlSettings.length >= 2) controlSettings(1) else null
+   val controlPassword: String = if (controlSettings.length >= 3) controlSettings(2) else null
+
    Global.HIVE_HourToUpdateMetadata =50
-   Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
-   Global.CONTROL_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set")))
-   
+   Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",controlConnString)
+     .setUserName(controlUserName)
+     .setPassword(controlPassword)
+   )
+   Global.CONTROL_Setting.append(new huemul_KeyValuePath("experimental",controlConnString)
+     .setUserName(controlUserName)
+     .setPassword(controlPassword)
+   )
+
    Global.ImpalaEnabled = false
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("production",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("experimental",getKeyFromFile(s"${localPath}prod-demo-setting-impala-connection.set")))
@@ -96,7 +106,7 @@ object globalSettings {
    
    
    //TEMPORAL SETTING
-   Global.TEMPORAL_Path.append(new huemul_KeyValuePath("production",s"${baseDir}/production/temp/"))
+   Global.TEMPORAL_Path.append(new huemul_KeyValuePath("production",s"$baseDir/production/temp/"))
    Global.TEMPORAL_Path.append(new huemul_KeyValuePath("experimental",s"$baseDir/experimental/temp/"))
      
    //RAW SETTING
