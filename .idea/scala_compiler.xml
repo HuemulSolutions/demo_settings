@@ -4,7 +4,7 @@
     <profile name="Maven 1" modules="demo_settings">
       <parameters>
         <parameter value="-dependencyfile" />
-        <parameter value="C:\Users\sebas\Documents\GitHub\demo_1.0_settings\target/.scala_dependencies" />
+        <parameter value="C:\Users\sebas\Documents\GitHub\demo_settings\target/.scala_dependencies" />
       </parameters>
     </profile>
   </component>
