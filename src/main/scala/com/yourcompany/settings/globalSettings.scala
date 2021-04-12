@@ -68,6 +68,8 @@ object globalSettings {
   * CONFIGURACION PARA GOOGLE CLOUD PLATFORM
   */
   //val baseDir = "gs://data_huemul_25/data/user/data" //for google
+
+
    val controlSettings: Array[String] = getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set").split(";")
    val controlConnString:String = controlSettings(0)
    val controlUserName: String = if (controlSettings.length >= 2) controlSettings(1) else null
