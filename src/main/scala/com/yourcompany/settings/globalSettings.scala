@@ -1,6 +1,8 @@
 package com.yourcompany.settings
 
+import com.databricks.dbutils_v1.DBUtilsV1
 import com.huemulsolutions.bigdata.common._
+
 import scala.io.Source
 import java.io.{FileNotFoundException, IOException}
 
@@ -40,29 +42,29 @@ object globalSettings {
   * CONFIGURACION PARA AZURE-DATABRICKS
   */
 
-  /*
+
    //para ejemplo sobre databricks
    Global.setBigDataProvider( huemulType_bigDataProvider.databricks)
    val baseDir = "/mnt/huemul/data"
    
    Global.HIVE_HourToUpdateMetadata =50
 
-   val dbutils = com.databricks.dbutils_v1.DBUtilsHolder.dbutils
-   val lControlConnectionString = dbutils.secrets.get(scope = "huemul-test-secret-scope", key = "production-demo-setting-control-connection")
+   val dbutils: DBUtilsV1 = com.databricks.dbutils_v1.DBUtilsHolder.dbutils
+   val lControlConnectionString: String = dbutils.secrets.get(scope = "huemul-test-secret-scope", key = "production-demo-setting-control-connection")
    Global.CONTROL_Setting.append(new huemul_KeyValuePath("production",lControlConnectionString))
 
    Global.ImpalaEnabled = false
-   val lImpalaConnectionString = dbutils.secrets.get(scope = "huemul-test-secret-scope", key = "production-demo-setting-impala-connection")
+   val lImpalaConnectionString: String = dbutils.secrets.get(scope = "huemul-test-secret-scope", key = "production-demo-setting-impala-connection")
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("production",lImpalaConnectionString))
 
    Global.setAVRO_format("avro")
    //FIN DATABRICKS
-   */
+
 
   /*********
   * CONFIGURACION ON-PREM
   */
-  val baseDir = "/user/data"
+  //val baseDir = "/user/data"
 
   /*********
   * CONFIGURACION PARA GOOGLE CLOUD PLATFORM
