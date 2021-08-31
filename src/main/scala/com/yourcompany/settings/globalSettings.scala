@@ -1,6 +1,6 @@
 package com.yourcompany.settings
 
-import com.databricks.dbutils_v1.DBUtilsV1
+//import com.databricks.dbutils_v1.DBUtilsV1
 import com.huemulsolutions.bigdata.common._
 
 import scala.io.Source
@@ -42,7 +42,7 @@ object globalSettings {
   * CONFIGURACION PARA AZURE-DATABRICKS
   */
 
-
+/*
    //para ejemplo sobre databricks
    Global.setBigDataProvider( huemulType_bigDataProvider.databricks)
    val baseDir = "/mnt/huemul/data"
@@ -58,6 +58,8 @@ object globalSettings {
    Global.IMPALA_Setting.append(new huemul_KeyValuePath("production",lImpalaConnectionString))
 
    Global.setAVRO_format("avro")
+
+ */
    //FIN DATABRICKS
 
 
@@ -69,7 +71,7 @@ object globalSettings {
   /*********
   * CONFIGURACION PARA GOOGLE CLOUD PLATFORM
   */
-  //val baseDir = "gs://data_huemul_25/data/user/data" //for google
+  val baseDir = "gs://data_huemul_25/data/user/data" //for google
 
 
    val controlSettings: Array[String] = getKeyFromFile(s"${localPath}prod-demo-setting-control-connection.set").split(";")
